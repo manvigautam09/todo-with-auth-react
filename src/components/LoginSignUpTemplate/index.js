@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import { connect } from "react-redux"
 import signIn from "../../assets/images/signin-image.jpg";
 import signUp from "../../assets/images/signup-image.jpg";
 import { routeConstants } from "../../routes/routeConstants";
-import { updateLoginDetails, updateSignUpDetails } from "../../store/actions";
-import { loginFormConstants, signupFormConstants, formNames } from "./formConstants";
+import { updateLoginDetails, updateSignUpDetails, updateLoginFormError, updateSignUpFormError } from "../../store/actions";
+import { loginFormConstants, signupFormConstants, formNames, validateEmail, validatePassword, validateUserName, validateConfirmPassword } from "./formConstants";
 
 const LoginSignUpTemplate = (props) => {
-    const { form, updateLoginDetails, updateSignUpDetails } = props;
+    const { form, updateLoginDetails, updateSignUpDetails, signUpData, updateLoginFormError, updateSignUpFormError, loginError, signUpError } = props;
     const formConstants = (form === formNames.LOGIN.label) ? loginFormConstants : signupFormConstants
 
-    const handleChange = (event, item) => {
+    const handleChange = (event, item, form) => {
         const inputValue = event.target.value;
-        if (form === formNames.LOGIN.label) {
-            updateLoginDetails({ item, inputValue })
-        }
-        else if (form === formNames.SIGNUP.label) {
-            updateSignUpDetails({ item, inputValue });
-        }
+        form === formNames.LOGIN.label ? updateLoginDetails({ item, inputValue }) : updateSignUpDetails({ item, inputValue });
     }
+
+    const handleOnBlur = (event, item, form) => {
+        const inputValue = event.target.value;
+        let error = "";
+        if (item.name === "email") {
+            error = validateEmail(inputValue);
+        }
+        else if (item.name === "password") {
+            error = validatePassword(inputValue)
+        }
+        else if (item.name === "name") {
+            error = validateUserName(inputValue);
+        }
+        else if (item.name === "confirmPassword") {
+            error = validateConfirmPassword(signUpData.password, inputValue)
+        }
+        form === formNames.LOGIN.label ? updateLoginFormError({ item, error }) : updateSignUpFormError({ item, error });
+    }
+
 
     return (
         <div className="login-signup-template">
@@ -33,11 +47,12 @@ const LoginSignUpTemplate = (props) => {
                     <div>
                         {
                             formConstants.map((item) => {
+                                const fieldError = form === formNames.LOGIN.label ? loginError[item.name] : signUpError[item.name];
                                 return (
                                     <div key={item.label} className="form-input">
                                         <label className="input-label">{item.label}</label>
-                                        <input type={item.type} name={item.name} className="input-field" onChange={(val) => handleChange(val, item, form)} />
-                                        <div className="error-div"></div>
+                                        <input type={item.type} name={item.name} className="input-field" onChange={(val) => handleChange(val, item, form)} onBlur={(e) => handleOnBlur(e, item, form)} />
+                                        <div className="error-div">{fieldError}</div>
                                     </div>)
                             })
                         }
@@ -48,14 +63,20 @@ const LoginSignUpTemplate = (props) => {
         </div>)
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
+        loginData: state.loginSignUpData.loginData,
+        signUpData: state.loginSignUpData.signUpData,
+        loginError: state.loginSignUpData.loginError,
+        signUpError: state.loginSignUpData.signUpError,
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         updateLoginDetails: (val) => dispatch(updateLoginDetails(val)),
-        updateSignUpDetails: (val) => dispatch(updateSignUpDetails(val))
+        updateSignUpDetails: (val) => dispatch(updateSignUpDetails(val)),
+        updateLoginFormError: (val) => dispatch(updateLoginFormError(val)),
+        updateSignUpFormError: (val) => dispatch(updateSignUpFormError(val))
     };
 }
 

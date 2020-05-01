@@ -10,6 +10,16 @@ const initialState = {
         email: "",
         password: "",
         confirmPassword: ""
+    },
+    loginError: {
+        email: "",
+        password: ""
+    },
+    signUpError: {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
     }
 };
 
@@ -21,6 +31,14 @@ const loginSignUpReducer = (state = initialState, action) => {
         }
         case actionTypes.UPDATE_SIGNUP_DETAILS: {
             state.signUpData[action.payload.item.name] = action.payload.inputValue
+            return { ...state }
+        }
+        case actionTypes.UPDATE_LOGIN_FORM_ERROR: {
+            state.loginError[action.payload.item.name] = action.payload.error;
+            return { ...state }
+        }
+        case actionTypes.UPDATE_SIGNUP_FORM_ERROR: {
+            state.signUpError[action.payload.item.name] = action.payload.error;
             return { ...state }
         }
         default:
