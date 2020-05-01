@@ -1,8 +1,10 @@
 import React from "react";
-import "./style.scss";
+import LoginSignUpTemplate from "../../components/LoginSignUpTemplate";
+import { formNames } from "../../components/LoginSignUpTemplate/formConstants";
+
 const Login = () => {
     return (
-        <div className="app-container">This is Login</div>
+        <LoginSignUpTemplate form={formNames.LOGIN.label} />
     )
 }
 export default Login;
