@@ -1,8 +1,8 @@
 import React from "react";
-
+import "./style.scss";
 const Login = () => {
     return (
-        <div>This is Login</div>
+        <div className="app-container">This is Login</div>
     )
 }
 export default Login;
