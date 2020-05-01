@@ -1,8 +1,10 @@
 import React from "react";
+import LoginSignUpTemplate from "../../components/LoginSignUpTemplate"
+import { formNames } from "../../components/LoginSignUpTemplate/formConstants";
 
 const SignUp = () => {
     return (
-        <div>This is SignUp</div>
+        <LoginSignUpTemplate form={formNames.SIGNUP.label} />
     )
 }
 export default SignUp;
