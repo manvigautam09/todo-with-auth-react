@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import { connect } from "react-redux"
 import signIn from "../../assets/images/signin-image.jpg";
 import signUp from "../../assets/images/signup-image.jpg";
 import { routeConstants } from "../../routes/routeConstants";
@@ -9,6 +10,10 @@ const LoginSignUpTemplate = (props) => {
     const { form } = props;
     const formConstants = (form === formNames.LOGIN.label) ? loginFormConstants : signupFormConstants
 
+    const handleChange = (event, item) => {
+        console.log("###Entered here", event.target.value, item, form)
+    }
+
     return (
         <div className="login-signup-template">
             <div className="form-section">
@@ -17,14 +22,16 @@ const LoginSignUpTemplate = (props) => {
                     <a href={form === formNames.LOGIN.label ? routeConstants.SIGNUP.path : routeConstants.LOGIN.path} className="alternate-form-link">{props.form === "Sign In" ? "Create an account" : "I am already member"}</a>
                 </div>
                 <div className="form-part">
-                    <div className="heading">{props.form}</div>
+                    <div className="heading">{form}</div>
                     <div>
                         {
                             formConstants.map((item) => {
-                                return (<div className="form-input">
-                                    <label className="input-label">{item.label}</label>
-                                    <input type={item.type} name={item.name} className="input-field" />
-                                </div>)
+                                return (
+                                    <div key={item.label} className="form-input">
+                                        <label className="input-label">{item.label}</label>
+                                        <input type={item.type} name={item.name} className="input-field" onChange={(val) => handleChange(val, item, form)} />
+                                        <div className="error-div"></div>
+                                    </div>)
                             })
                         }
                     </div>
@@ -33,4 +40,15 @@ const LoginSignUpTemplate = (props) => {
             </div>
         </div>)
 }
-export default LoginSignUpTemplate;
+
+const mapStateToProps = () => {
+    return {
+
+    };
+}
+const mapDispatchToProps = () => {
+    return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginSignUpTemplate);
+
