@@ -31,7 +31,7 @@ export const signupFormConstants = [
 
         label: "Confirm Password",
         type: "password",
-        name: "confirmpassword"
+        name: "confirmPassword"
     }
 ]
 export const formNames = {
