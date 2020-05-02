@@ -11,7 +11,6 @@ const LoginSignUpTemplate = (props) => {
     formConstants,
     alternateLink,
   } = props;
-
   return (
     <div className="login-signup-template">
       <div className="form-section">
@@ -28,7 +27,6 @@ const LoginSignUpTemplate = (props) => {
               return (
                 <FormInputField
                   item={item}
-                  form={form}
                   key={item.label}
                   onChange={onChange}
                   password={formData.password}

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./style.scss";
 
 const FormInputField = (props) => {
-  const { item, onChange, form, password } = props;
+  const { item, onChange, password } = props;
   const [fieldError, updateFieldError] = useState("");
 
-  const handleOnBlur = (event, item, form) => {
+  const handleOnBlur = (event, item) => {
     const inputValue = event.target.value;
     let error = item.validations(inputValue, password);
     updateFieldError(error);
@@ -27,7 +27,7 @@ const FormInputField = (props) => {
         name={item.name}
         className="input-field"
         onChange={(val) => handleChange(val, item)}
-        onBlur={(e) => handleOnBlur(e, item, form)}
+        onBlur={(e) => handleOnBlur(e, item)}
       />
       <div className="error-div">{fieldError}</div>
     </div>
