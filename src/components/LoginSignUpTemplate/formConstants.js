@@ -47,6 +47,11 @@ export const validateConfirmPassword = (value, password) => {
   return "";
 };
 
+export const alternateFormLinkLabels = {
+  LOGIN: "Create an account",
+  SIGNUP: "I am already member",
+};
+
 export const loginFormConstants = [
   {
     label: "Email",
@@ -80,12 +85,12 @@ export const signupFormConstants = [
     name: "password",
     validations: validatePassword,
   },
-  {
-    label: "Confirm Password",
-    type: "password",
-    name: "confirmPassword",
-    validations: validateConfirmPassword,
-  },
+  //   {
+  //     label: "Confirm Password",
+  //     type: "password",
+  //     name: "confirmPassword",
+  //     validations: validateConfirmPassword,
+  //   },
 ];
 export const formNames = {
   LOGIN: {

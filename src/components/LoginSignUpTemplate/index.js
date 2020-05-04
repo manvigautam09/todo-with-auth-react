@@ -6,18 +6,20 @@ const LoginSignUpTemplate = (props) => {
   const {
     form,
     image,
-    onChange,
     formData,
-    formConstants,
+    onChange,
     alternateLink,
+    formConstants,
+    alternateFormLinkLabel,
   } = props;
+
   return (
     <div className="login-signup-template">
       <div className="form-section">
         <div className="image-part">
           <img src={image} alt="formimage" />
           <a href={alternateLink} className="alternate-form-link">
-            {form === "Sign In" ? "Create an account" : "I am already member"}
+            {alternateFormLinkLabel}
           </a>
         </div>
         <div className="form-part">

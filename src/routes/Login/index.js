@@ -6,6 +6,7 @@ import signIn from "../../assets/images/signin-image.jpg";
 import {
   formNames,
   loginFormConstants,
+  alternateFormLinkLabels,
 } from "../../components/LoginSignUpTemplate/formConstants";
 import LoginSignUpTemplate from "../../components/LoginSignUpTemplate";
 
@@ -24,6 +25,7 @@ const Login = (props) => {
       form={formNames.LOGIN.label}
       formConstants={loginFormConstants}
       alternateLink={routeConstants.SIGNUP.path}
+      alternateFormLinkLabel={alternateFormLinkLabels.LOGIN}
     />
   );
 };

@@ -6,6 +6,7 @@ import { updateSignUpDetails } from "../../store/actions";
 import {
   formNames,
   signupFormConstants,
+  alternateFormLinkLabels,
 } from "../../components/LoginSignUpTemplate/formConstants";
 import LoginSignUpTemplate from "../../components/LoginSignUpTemplate";
 
@@ -24,6 +25,7 @@ const SignUp = (props) => {
       form={formNames.SIGNUP.label}
       formConstants={signupFormConstants}
       alternateLink={routeConstants.LOGIN.path}
+      alternateFormLinkLabel={alternateFormLinkLabels.SIGNUP}
     />
   );
 };
