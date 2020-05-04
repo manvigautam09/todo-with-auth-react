@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { routeConstants } from "../routeConstants";
+import { routeConstants } from "../index";
 import signUp from "../../assets/images/signup-image.jpg";
 import { updateSignUpDetails } from "../../store/actions";
 import {

@@ -6,8 +6,9 @@ const LoginSignUpTemplate = (props) => {
   const {
     form,
     image,
-    formData,
     onChange,
+    formData,
+    handleSubmit,
     alternateLink,
     formConstants,
     alternateFormLinkLabel,
@@ -36,7 +37,7 @@ const LoginSignUpTemplate = (props) => {
               );
             })}
           </div>
-          <button type="Submit" className="form-button">
+          <button type="Submit" className="form-button" onClick={handleSubmit}>
             Submit
           </button>
         </div>

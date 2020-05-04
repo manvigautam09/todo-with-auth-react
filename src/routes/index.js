@@ -1,10 +1,31 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { routeConstants } from "./routeConstants";
+import { Route, Router, Switch } from "react-router-dom";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import history from "../store/history";
+import TodoDashboard from "./TodoDashboard";
+
+export const routeConstants = {
+  LOGIN: {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  SIGNUP: {
+    path: "/signUp",
+    name: "SignUp",
+    component: SignUp,
+  },
+  TODODASHBOARD: {
+    path: "/todoDashboard",
+    name: "TodoDashboard",
+    component: TodoDashboard,
+  },
+};
 
 const AppRoutes = () => {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
         <Route
           path={routeConstants.LOGIN.path}

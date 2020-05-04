@@ -11,6 +11,7 @@ const initialState = {
     password: "",
     confirmPassword: "",
   },
+  token: "",
 };
 
 const loginSignUpReducer = (state = initialState, action) => {
@@ -22,6 +23,9 @@ const loginSignUpReducer = (state = initialState, action) => {
     case actionTypes.UPDATE_SIGNUP_DETAILS: {
       state.signUpData[action.payload.item.name] = action.payload.inputValue;
       return { ...state };
+    }
+    case actionTypes.SIGN_IN_USER_SUCCESS: {
+      return { ...state, token: action.payload };
     }
     default:
       return { ...state };

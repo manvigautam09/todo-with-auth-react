@@ -13,3 +13,24 @@ export const updateSignUpDetails = (payload) => {
     payload: payload,
   };
 };
+
+export const loginUserRequest = (payload) => {
+  return {
+    type: actionTypes.SIGN_IN_USER_REQUEST,
+    payload: payload,
+  };
+};
+
+export const loginUserSuccess = (payload) => {
+  return {
+    type: actionTypes.SIGN_IN_USER_SUCCESS,
+    payload: payload,
+  };
+};
+
+export const loginUserFailure = (payload) => {
+  return {
+    type: actionTypes.SIGN_IN_USER_FAILURE,
+    payload: payload,
+  };
+};
