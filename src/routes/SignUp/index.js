@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { routeConstants } from "../index";
+import { routesConfig } from "../index";
 import signUp from "../../assets/images/signup-image.jpg";
 import { updateSignUpDetails } from "../../store/actions";
 import {
@@ -24,7 +24,7 @@ const SignUp = (props) => {
       onChange={handleChange}
       form={formNames.SIGNUP.label}
       formConstants={signupFormConstants}
-      alternateLink={routeConstants.LOGIN.path}
+      alternateLink={routesConfig.LOGIN.path}
       alternateFormLinkLabel={alternateFormLinkLabels.SIGNUP}
     />
   );
