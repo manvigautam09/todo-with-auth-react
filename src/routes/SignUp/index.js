@@ -1,10 +1,43 @@
 import React from "react";
-import LoginSignUpTemplate from "../../components/LoginSignUpTemplate"
-import { formNames } from "../../components/LoginSignUpTemplate/formConstants";
+import { connect } from "react-redux";
+import { routesConfig } from "../index";
+import signUp from "../../assets/images/signup-image.jpg";
+import { updateSignUpDetails } from "../../store/actions";
+import {
+  formNames,
+  signupFormConstants,
+  alternateFormLinkLabels,
+} from "../../components/LoginSignUpTemplate/formConstants";
+import LoginSignUpTemplate from "../../components/LoginSignUpTemplate";
 
-const SignUp = () => {
-    return (
-        <LoginSignUpTemplate form={formNames.SIGNUP.label} />
-    )
-}
-export default SignUp;
+const SignUp = (props) => {
+  const { updateSignUpDetails, signUpData } = props;
+  const handleChange = (event, item) => {
+    const inputValue = event.target.value;
+    updateSignUpDetails({ item, inputValue });
+  };
+
+  return (
+    <LoginSignUpTemplate
+      image={signUp}
+      formData={signUpData}
+      onChange={handleChange}
+      form={formNames.SIGNUP.label}
+      formConstants={signupFormConstants}
+      alternateLink={routesConfig.LOGIN.path}
+      alternateFormLinkLabel={alternateFormLinkLabels.SIGNUP}
+    />
+  );
+};
+const mapStateToProps = (state) => {
+  return {
+    signUpData: state.loginSignUpData.signUpData,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateSignUpDetails: (val) => dispatch(updateSignUpDetails(val)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
