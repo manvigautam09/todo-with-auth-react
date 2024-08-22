@@ -1,36 +1,48 @@
 import React from "react";
 import "./style.scss";
-import signIn from "../../assets/images/signin-image.jpg";
-import signUp from "../../assets/images/signup-image.jpg";
-import { routeConstants } from "../../routes/routeConstants";
-import { loginFormConstants, signupFormConstants, formNames } from "./formConstants";
+import FormInputField from "./FormInputField";
 
 const LoginSignUpTemplate = (props) => {
-    const { form } = props;
-    const formConstants = (form === formNames.LOGIN.label) ? loginFormConstants : signupFormConstants
+  const {
+    form,
+    image,
+    onChange,
+    formData,
+    handleSubmit,
+    alternateLink,
+    formConstants,
+    alternateFormLinkLabel,
+  } = props;
 
-    return (
-        <div className="login-signup-template">
-            <div className="form-section">
-                <div className="image-part">
-                    <img src={form === formNames.LOGIN.label ? signIn : signUp} alt="formimage" />
-                    <a href={form === formNames.LOGIN.label ? routeConstants.SIGNUP.path : routeConstants.LOGIN.path} className="alternate-form-link">{props.form === "Sign In" ? "Create an account" : "I am already member"}</a>
-                </div>
-                <div className="form-part">
-                    <div className="heading">{props.form}</div>
-                    <div>
-                        {
-                            formConstants.map((item) => {
-                                return (<div className="form-input">
-                                    <label className="input-label">{item.label}</label>
-                                    <input type={item.type} name={item.name} className="input-field" />
-                                </div>)
-                            })
-                        }
-                    </div>
-                    <button type="Submit" className="form-button">Submit</button>
-                </div>
-            </div>
-        </div>)
-}
+  return (
+    <div className="login-signup-template">
+      <div className="form-section">
+        <div className="image-part">
+          <img src={image} alt="formimage" />
+          <a href={alternateLink} className="alternate-form-link">
+            {alternateFormLinkLabel}
+          </a>
+        </div>
+        <div className="form-part">
+          <div className="heading">{form}</div>
+          <div>
+            {formConstants.map((item) => {
+              return (
+                <FormInputField
+                  item={item}
+                  key={item.label}
+                  onChange={onChange}
+                  password={formData.password}
+                />
+              );
+            })}
+          </div>
+          <button type="Submit" className="form-button" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 export default LoginSignUpTemplate;
